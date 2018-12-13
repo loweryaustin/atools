@@ -16,6 +16,7 @@ my $fileInput = shift or die "Usage: $0 FILENAME\n";
 
 ## Setup
 my $date = strftime "%F %H:%M:%S", localtime;
+my $epoch = time();
 
 my $user = $ENV{LOGNAME} || $ENV{USER} || getpwuid($<);
 my $homeDir = $ENV{HOME} || (getpwuid $<)[7];
@@ -26,7 +27,7 @@ my $logPath = $backupDir.'bkup.log';
 
 my $cwd = cwd."/";
 my $origPath = $cwd.$fileInput;
-my $destPath = $backupDir.$fileInput;
+my $destPath = $backupDir.$fileInput."-".$epoch;
 mkdir ($backupDir, 0755);
 open my $fhout, ">>", $logPath or die $!;
 
