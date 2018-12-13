@@ -28,7 +28,7 @@ my $cwd = cwd."/";
 my $origPath = $cwd.$fileInput;
 my $destPath = $backupDir.$fileInput;
 mkdir ($backupDir, 0755);
-open my $fhout, ">", $logPath or die $!;
+open my $fhout, ">>", $logPath or die $!;
 
 
 ## Do the thing
