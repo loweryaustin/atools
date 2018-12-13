@@ -27,7 +27,6 @@ my $logPath = $backupDir.'bkup.log';
 my $cwd = cwd;
 my $origPath = $cwd.$fileInput;
 my $destPath = $backupDir.$fileInput;
-print $backupDir;
 mkdir ($backupDir, 0755);
 open my $fhout, ">", $logPath or die $!;
 
