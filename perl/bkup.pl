@@ -34,6 +34,6 @@ open my $fhout, ">>", $logPath or die $!;
 ## Do the thing
 cp $fileInput, $destPath;
 select $fhout;
-print $fhout $date." ".$user." ".$origPath." -> ".$destPath;
+print $fhout $date." ".$user." ".$origPath." -> ".$destPath."\n";
 select STDOUT;
 print "Copied ".$origPath." -> ".$destPath;
