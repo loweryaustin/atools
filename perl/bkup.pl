@@ -24,7 +24,7 @@ my $homeDir = $ENV{HOME} || (getpwuid $<)[7];
 my $backupDir = $homeDir."/bkups/";
 my $logPath = $backupDir.'bkup.log';
 
-my $cwd = cwd;
+my $cwd = cwd."/";
 my $origPath = $cwd.$fileInput;
 my $destPath = $backupDir.$fileInput;
 mkdir ($backupDir, 0755);
