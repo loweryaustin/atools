@@ -5,7 +5,13 @@ use File::Copy qw(cp);
 use Cwd qw(cwd);
 use POSIX qw(strftime);
 
- 
+###################################
+# BKUP - Version 0.5.0            #
+#                                 #
+# Released under the MIT License  #
+# By Austin Lowery                #
+###################################
+
 ## Set Options
 
 ## Handle Input
