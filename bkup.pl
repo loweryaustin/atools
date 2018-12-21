@@ -2,8 +2,10 @@
 use strict;
 use warnings;
 use File::Copy qw(cp);
-use File::Spec::Functions;
 use POSIX qw(strftime);
+use File::Spec::Functions;
+use Getopt::Long qw(GetOptions);
+Getopt::Long::Configure qw(gnu_getopt);
 
 ###################################
 # BKUP - Version 0.6.1            #
@@ -12,7 +14,14 @@ use POSIX qw(strftime);
 # By Austin Lowery                #
 ###################################
 
+## Options
+my $install;
+
 ## Handle Input
+GetOptions(
+    'install|i' => \$install,
+) or die "You just lost the game.\n";
+
 my $input = shift or die "Usage: $0 FILENAME\n";
 my $origPath = validateFilePath($input);
 my ($volume, $dirs, $fileName) = File::Spec->splitpath($origPath);
