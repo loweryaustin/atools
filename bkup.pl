@@ -3,26 +3,21 @@ use strict;
 use warnings;
 use File::Copy qw(cp);
 use File::Spec::Functions;
-use File::Spec;
 use POSIX qw(strftime);
 
 ###################################
-# BKUP - Version 0.6.0            #
+# BKUP - Version 0.6.1            #
 #                                 #
 # Released under the MIT License  #
 # By Austin Lowery                #
 ###################################
 
-
-
 ## Handle Input
 my $input = shift or die "Usage: $0 FILENAME\n";
-
 my $origPath = validateFilePath($input);
 my ($volume, $dirs, $fileName) = File::Spec->splitpath($origPath);
 
 ## Setup
-
 my $date = strftime "%F %H:%M:%S", localtime;
 my $epoch = time();
 my $user = $ENV{LOGNAME} || $ENV{USER} || getpwuid($<);
@@ -30,7 +25,6 @@ my $homeDir = $ENV{HOME} || (getpwuid $<)[7];
 my $backupDir = $homeDir."/bkups/";
 my $logPath = $backupDir.'bkup.log';
 my $destPath = $backupDir.$fileName."-".$epoch;
-
 open my $fhout, ">>", $logPath or die $!;
 
 ## Do the thing
@@ -42,7 +36,6 @@ select STDOUT;
 print "Copied ".$origPath." -> ".$destPath;
 
 ## Subs
-
 sub validateFilePath {
 
 	my ($input) = @_;
