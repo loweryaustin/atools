@@ -76,6 +76,7 @@ sub installBkup {
 	if (-e $installDest) { die("bkup is already installed at $installDest\n");};
 	cp ($0, $installDest);
 	chmod 0755, $installDest;
+	unlink $0;
 	print "Installed to $installDest";
 	exit;
 }
