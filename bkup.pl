@@ -10,7 +10,7 @@ use Getopt::Long qw(GetOptions);
 Getopt::Long::Configure qw(gnu_getopt);
 
 ###################################
-# BKUP - Version 0.6.1            #
+# bkup - Version 0.6.1            #
 #                                 #
 # Released under the MIT License  #
 # By Austin Lowery                #
