@@ -55,20 +55,14 @@ print "Copied ".$origPath." -> ".$destPath;
 
 ## Subs
 sub validateFilePath {
-
 	my ($input) = @_;
-	
 	if (! -e $input) {
-
 		die ("$input not found.");
 	} elsif (-d $input){
-
 		die ("$input is a directory. Directory support is planed in feature #48. Check pm.austinlowery.com for more info.");	
 	} elsif (! file_name_is_absolute($input)) {
-		
 		return File::Spec->rel2abs($input);
 	} else {
-		
 		return $input
 	}	
 }
@@ -78,10 +72,8 @@ sub installBkup {
 	if (! -e $installDir) { die("$installDir does not exist. Please create it or choose a different directory")};
 	if (! -d $installDir) { die("$installDir is not a directory. You must use a directory with the --install-dir flag.")};
 	if (! -w $installDir) { die("You do not have permission to install bkup to $installDir . Try using sudo. If you don't have sudo access, you can use --install-dir [Path to install Dir] in additon to the install flag to specify a directory that you have permission to write to.\n");};
-	
 	my $installDest = $installDir."bkup"; 
 	if (-e $installDest) { die("bkup is already installed at $installDest\n");};
-			
 	cp ($0, $installDest);
 	chmod 0755, $installDest;
 	print "Installed to $installDest";
