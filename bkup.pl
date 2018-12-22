@@ -22,13 +22,13 @@ my $epoch = time();
 my $user = $ENV{LOGNAME} || $ENV{USER} || getpwuid($<);
 my $homeDir = $ENV{HOME} || (getpwuid $<)[7];
 my $defaultFallbackInstallDir = "$homeDir/bkups/bin/";
-my $installDir = "/usr/local/bin/";
 my $backupDir = $homeDir."/bkups/";
 my $logPath = $backupDir.'bkup.log';
 open my $fhout, ">>", $logPath or die $!;
 
 ## Options
 my $install;
+my $installDir = "/usr/local/bin/";
 
 ## Handle Input
 GetOptions(
