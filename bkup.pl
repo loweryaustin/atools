@@ -10,7 +10,7 @@ use Getopt::Long qw(GetOptions);
 Getopt::Long::Configure qw(gnu_getopt);
 
 ###################################
-# bkup - Version 0.7.0            #
+# bkup - Version 0.7.5            #
 #                                 #
 # Released under the MIT License  #
 # By Austin Lowery                #
@@ -68,15 +68,16 @@ sub validateFilePath {
 }
 
 sub installBkup {
-	if ($installDir eq $defaultFallbackInstallDir) { make_path($installDir); }; # Since this is the default fallback directroy, we'll create it to faciliate the quick and easy one step installation process that this script must posess.
+	if ( $installDir !~ m/\/$/) { $installDir = "$installDir/"; };
+	my $installDest = $installDir."bkup";	
+	if ($installDir eq $defaultFallbackInstallDir) { make_path($installDir); }; # Since this is the default fallback directroy, we'll create it to faciliate a quick and easy two step installation process for non root users.
 	if (! -e $installDir) { die("$installDir does not exist. Please create it or choose a different directory")};
 	if (! -d $installDir) { die("$installDir is not a directory. You must use a directory with the --install-dir flag.")};
 	if (! -w $installDir) { die("You do not have permission to install bkup to $installDir . Try using sudo. If you don't have sudo access, you can use --install-dir [Path to install Dir] in additon to the install flag to specify a directory that you have permission to write to.\n");};
-	my $installDest = $installDir."bkup"; 
 	if (-e $installDest) { die("bkup is already installed at $installDest\n");};
 	cp ($0, $installDest);
 	chmod 0755, $installDest;
-	unlink $0;
-	print "Installed to $installDest";
+	print "bkup installed to $installDest\n";
+	if ( grep(! /^$installDir$/, File::Spec->path()) ) { print "To complete your installation, issue the following command and add it to your shell configuration file (.bashrc etc.):\nsource \"\$PATH:$installDir\"";};
 	exit;
 }
