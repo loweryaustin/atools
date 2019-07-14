@@ -24,6 +24,7 @@ my $homeDir = $ENV{HOME} || (getpwuid $<)[7];
 my $defaultFallbackInstallDir = "$homeDir/bkups/bin/";
 my $backupDir = $homeDir."/bkups/";
 my $logPath = $backupDir.'bkup.log';
+make_path($backupDir);
 open my $fhout, ">>", $logPath or die $!;
 
 ## Options
